@@ -1,0 +1,10 @@
+.elements {
+  margin: auto;
+  margin-top: 36px;
+}
+
+@media screen and (min-width: 935px) {
+  .elements {
+    margin-top: 51px;
+  }
+}

@@ -1,0 +1,21 @@
+.element__button-like {
+  background-image: url(../../../image/icon/heart_icon.svg);
+  background-position: center;
+  background-size: cover;
+  background-color: unset;
+  border: none;
+  outline-color: rgb(0%, 0%, 0%, 0.2);
+
+  padding: 0;
+
+  width: 20px;
+  height: 18px;
+
+  transition: opacity 0.3s linear;
+  cursor: pointer;
+}
+
+.element__button-like:hover {
+  opacity: 0.5;
+  transition: opacity 0.3s linear;
+}
