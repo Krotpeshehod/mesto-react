@@ -13,6 +13,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
+  const [isImagePopupOpen, setIsImagePopupOpen] = useState(false)
   const [selectedCard, setSelectedCard] = useState(false)
 
   function handleEditProfileClick(){
@@ -29,15 +30,14 @@ function App() {
 
   function handleCardClick(card){
     setSelectedCard(card)
+    setIsImagePopupOpen(true)
   }
 
   function closeAllPopups(){
     setIsEditProfilePopupOpen(false)
     setIsAddPlacePopupOpen (false)
     setIsEditAvatarPopupOpen(false)
-    setSelectedCard(false)
-    
-
+    setIsImagePopupOpen(false)
   }
 
   return (
@@ -55,7 +55,7 @@ function App() {
         title= 'Редактировать профиль'
         saveButton = 'Сохранить'
         isOpen= {isEditProfilePopupOpen}
-        isClose = {closeAllPopups}
+        onClose = {closeAllPopups}
       >
         <input className="popup__form-text popup__form-text_type_profile-name" type="text" id="name-profile" name="name"
           required placeholder="Имя" minLength="2" maxLength="40" autoComplete="off" />
@@ -70,7 +70,7 @@ function App() {
         title= 'Новое место'
         saveButton = 'Добавить'
         isOpen= {isAddPlacePopupOpen}
-        isClose = {closeAllPopups}
+        onClose = {closeAllPopups}
       >
         <input className="popup__form-text popup__form-text_type_element-name" type="text" id="name-card" name="name"
           required placeholder="Название" minLength="2" maxLength="30" autoComplete="off" />
@@ -85,7 +85,7 @@ function App() {
         title= 'Обновить аватар'
         saveButton = 'Сохранить'
         isOpen= {isEditAvatarPopupOpen}
-        isClose = {closeAllPopups}
+        onClose = {closeAllPopups}
       >
         <input className="popup__form-text popup__form-text_type_avatar" type="url" id="avatar" name="avatar" required
           placeholder="Ссылка на аватар" autoComplete="off" />
@@ -100,6 +100,7 @@ function App() {
 
       <ImagePopup
         card = {selectedCard}
+        isOpen = {isImagePopupOpen}
         onClose = {closeAllPopups}
       />
 
