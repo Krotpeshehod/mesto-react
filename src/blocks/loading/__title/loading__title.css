@@ -1,0 +1,18 @@
+.loading__title{
+  margin: 20px 10px 0;
+  text-align: center;
+  min-width: 260px;
+  max-width: 750px;
+
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 25px;
+}
+
+@media screen and (min-width: 935px) {
+  .loading__title {
+    margin-top: 50px;
+    font-size: 24px;
+    line-height: 30px;
+  }
+}

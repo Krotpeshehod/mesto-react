@@ -16,7 +16,7 @@ class Api{
 
   
   getAllCards(){
-    return fetch(`${this._url}cards1`, {
+    return fetch(`${this._url}cards`, {
       method: "GET",
       headers: this._headers
     })

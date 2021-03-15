@@ -10,8 +10,11 @@ function Main (props){
   const [userAvatar, setUserAvatar] = useState('')
   const [cards, setCards] = useState([])
 
-  const [loading, setLoading] = useState(true)
-  const [loadingPic, setLoadingPic] = useState('../image/icon/loading.gif')
+  const [loadingStat, setLoadingStat] = useState(true)
+  const [loadingImage, setLoadingPic] = useState({
+    image: 'loading.gif',
+    name: 'Идет загрузка... мы близки 👽' 
+  })
 
   useEffect(()=>{
     Promise.all([api.getUserData(), api.getAllCards()])
@@ -21,18 +24,24 @@ function Main (props){
         setUserAvatar(data.avatar)
         setCards(cards)
       })
-      .then(()=> setLoading(false))
+      .then(()=> setLoadingStat(false))
       .catch((err) => {
         console.log(err);
-        setTimeout(() => setLoadingPic('../image/icon/error.gif'), 10000)
+        setTimeout(() => setLoadingPic(
+          { image: 'error.gif',
+            width: '300px',
+            height: '300px',
+            name: 'Что-то пошло не так и мы уже прикладываем подорожник. Приходите попозже 😭 или загляните в консоль'
+          }
+        ), 10000)
       })
   }, [])
 
   return(
     <main className="content">
       <Loading
-        isLoading= {loading}
-        image={loadingPic}
+        isLoading= {loadingStat}
+        loading={loadingImage}
       />
       <section className="profile">
         <div className="profile__content">
