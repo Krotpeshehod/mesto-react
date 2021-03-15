@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/mesto-react/index.html/static/css/main.6a718487.chunk.css",
+    "main.js": "/mesto-react/index.html/static/js/main.9db78498.chunk.js",
+    "main.js.map": "/mesto-react/index.html/static/js/main.9db78498.chunk.js.map",
+    "runtime-main.js": "/mesto-react/index.html/static/js/runtime-main.f6c75210.js",
+    "runtime-main.js.map": "/mesto-react/index.html/static/js/runtime-main.f6c75210.js.map",
+    "static/js/2.3ce4f598.chunk.js": "/mesto-react/index.html/static/js/2.3ce4f598.chunk.js",
+    "static/js/2.3ce4f598.chunk.js.map": "/mesto-react/index.html/static/js/2.3ce4f598.chunk.js.map",
+    "index.html": "/mesto-react/index.html/index.html",
+    "static/css/main.6a718487.chunk.css.map": "/mesto-react/index.html/static/css/main.6a718487.chunk.css.map",
+    "static/js/2.3ce4f598.chunk.js.LICENSE.txt": "/mesto-react/index.html/static/js/2.3ce4f598.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/mesto-react/index.html/static/media/heart_icon_black.4d79e05b.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f6c75210.js",
+    "static/js/2.3ce4f598.chunk.js",
+    "static/css/main.6a718487.chunk.css",
+    "static/js/main.9db78498.chunk.js"
+  ]
+}
