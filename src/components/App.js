@@ -7,7 +7,6 @@ import PopupWithForm from './PopupWithForm'
 import ImagePopup from './ImagePopup'
 import { useState } from 'react';
 
-
 function App() {
   
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
@@ -41,7 +40,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="app">
       <Header/>
       <Main
         onEditAvatar={handleEditAvatarClick}
@@ -50,6 +49,7 @@ function App() {
         onCardClick={handleCardClick}
       />
       <Footer/>
+
       <PopupWithForm
         name= 'profile'
         title= 'Редактировать профиль'

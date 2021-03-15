@@ -1,10 +1,15 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/fonts.css);
+@import url(./blocks/app/app.css);
 
 @import url(./blocks/page/page.css);
 @import url(./blocks/link-opacity/link-opacity.css);
 @import url(./blocks/error/error.css);
 @import url(./blocks/error/_active/error_active.css);
+
+@import url(./blocks/loading/loading.css);
+@import url(./blocks/loading/loading_active.css);
+@import url(./blocks/loading/__picture/loading__picture.css);
 
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__logo/header__logo.css);
