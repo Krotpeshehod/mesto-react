@@ -4,7 +4,7 @@ function Loading(props){
     <section className={`loading ${props.isLoading? 'loading_active' : ''}`}>
       <div className="loading__picture" 
         style={{ 
-          backgroundImage: `url(../../${props.loadingData.image}`, 
+          backgroundImage: `url(${props.loadingData.image})`, 
           minWidth: `${props.loadingData.width}`,
           minHeight:`${props.loadingData.height}`,
         }}/>

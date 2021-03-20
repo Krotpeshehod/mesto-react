@@ -22,6 +22,56 @@ class Api{
     })
     .then(onError)
   }
+
+
+  changeLikeCardStatus(id, isLiked){
+    return fetch(`${this._url}cards/likes/${id}`, {
+      method: `${isLiked? "PUT" : "DELETE"}`,
+      headers: this._headers
+    })
+    .then(onError)
+  }
+
+  deleteCard(id){
+    return fetch(`${this._url}cards/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+    .then(onError)
+  }
+
+  setUserInfo(data){
+    return fetch(`${this._url}users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        about: data.about}),
+  })
+  .then(onError)
+  }
+
+  setUserAvatar(avatar){
+    return fetch(`${this._url}users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify(avatar),
+  })
+  .then(onError)
+  }
+
+  setNewCard(data){
+  return fetch(`${this._url}cards`, {
+    method: "POST",
+    headers: this._headers,
+    body: JSON.stringify({
+      name: data.name,
+      link: data.link
+    }),
+  })
+  .then(onError)
+}
+
 }
 
 const api = new Api ({
