@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import {CurrentUserContext} from '../contexts/CurrentUserContext'
 
+
 function Card(props){
 
   const currentUser = useContext(CurrentUserContext)
@@ -23,14 +24,14 @@ function Card(props){
   function handleLikeClick (){
     props.onCardLike(props)
   }
-  
-  function handleDeleteClick (){
-    props.onCardDelete(props)
-  }
 
+  function handleCardDeleteClick(){
+    props.onCardDeletePopup(props)
+  }
+ 
   return(
       <li className="element">
-        <button className={cardDeleteButtonClassName} type="button" aria-label="удалить" onClick={handleDeleteClick}/>
+        <button className={cardDeleteButtonClassName} type="button" aria-label="удалить" onClick={handleCardDeleteClick}/>
         <img className="element__image" src={props.link} alt={props.name} onClick={handleClick}/>
         <div className="element__container">
           <h2 className="element__title">{props.name}</h2>

@@ -40,7 +40,7 @@ function Main (props){
           {...item} 
           onCardClick={props.onCardClick} 
           onCardLike={props.onCardLike} 
-          onCardDelete={props.onCardDelete}
+          onCardDeletePopup={props.onCardDeletePopup}
           />)}
         </ul>
       </section>

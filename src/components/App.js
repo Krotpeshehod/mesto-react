@@ -1,20 +1,18 @@
+import { useState, useEffect } from 'react';
+import {CurrentUserContext} from '../contexts/CurrentUserContext'
 import '../index.css';
 import '../utils/api';
 import loadingImage from '../image/gif/loading.gif'
 import errorImage from '../image/gif/error.gif'
-
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import PopupWithForm from './PopupWithForm'
 import ImagePopup from './ImagePopup'
 import EditProfilePopup from './EditProfilePopup'
 import EditAvatarPopup from './EditAvatarPopup'
 import AddPlacePopup from './AddPlacePopup'
 import api from '../utils/api';
- 
-import { useState, useEffect } from 'react';
-import {CurrentUserContext} from '../contexts/CurrentUserContext'
+import DeletePopup from './DeletePopup';
 
 function App() {
   
@@ -22,6 +20,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false)
+  const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false)
   const [selectedCard, setSelectedCard] = useState(false)
   const [currentUser, setCurrentUser] = useState('')
   const [cards, setCards] = useState([])
@@ -64,6 +63,11 @@ function App() {
   function handleCardClick(card){
     setSelectedCard(card)
     setIsImagePopupOpen(true)
+  }
+
+   function handleDeleteCardClick(card){
+    setSelectedCard(card)
+    setIsDeletePopupOpen(true)
   }
 
   function handleCardLike(props){
@@ -111,6 +115,7 @@ function App() {
     setIsAddPlacePopupOpen (false)
     setIsEditAvatarPopupOpen(false)
     setIsImagePopupOpen(false)
+    setIsDeletePopupOpen(false)
   }
 
   return (
@@ -124,7 +129,7 @@ function App() {
           onCardClick={handleCardClick}
           cards={cards}
           onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
+          onCardDeletePopup={handleDeleteCardClick}
           isLoading={loading}
           loadingData={loadingData}
         />
@@ -148,10 +153,11 @@ function App() {
           onAddPlace={handleAddPlaceSubmit}
         />
 
-        <PopupWithForm
-          name= 'delete-card'
-          title= 'Вы Уверены?'
-          saveButton = 'Да'
+        <DeletePopup
+          card = {selectedCard}
+          isOpen={isDeletePopupOpen} 
+          onClose={closeAllPopups} 
+          onCardDelete={handleCardDelete}
         />
 
         <ImagePopup
