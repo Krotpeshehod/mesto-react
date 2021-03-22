@@ -16,10 +16,11 @@ function EditAvatarPopup(props){
     <PopupWithForm
       name= 'avatar'
       title= 'Обновить аватар'
-      saveButton = 'Сохранить'
       isOpen= {props.isOpen}
       onClose = {props.onClose}
       onSubmit= {handleSubmit}
+      saveButton= {props.saveButton.save}
+      saveButtonClick = {props.saveButtonClick}
   >
     <input className="popup__form-text popup__form-text_type_avatar" type="url" id="avatar" name="avatar" required
       placeholder="Ссылка на аватар" autoComplete="off" ref={avatarRef} />

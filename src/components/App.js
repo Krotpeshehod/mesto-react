@@ -28,6 +28,8 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [loadingData, setLoadingData] = useState({image:loadingImage})
 
+  const [saveButton, setSaveButton] = useState({add: 'Добавить', save: 'Сохранить', delete: 'Да'})
+ 
   useEffect(()=>{
     Promise.all([api.getUserData(), api.getAllCards()])
       .then(([data, cards])=>{ 
@@ -70,6 +72,10 @@ function App() {
     setIsDeletePopupOpen(true)
   }
 
+  function handleСhangeSaveButton(){
+    setSaveButton({add: 'Сохранение...', save: 'Сохранение...', delete: 'Удаление...'})
+  }
+
   function handleCardLike(props){
     const isLiked = props.likes.some(item => item._id === currentUser._id)
     api.changeLikeCardStatus(props._id, !isLiked)
@@ -79,35 +85,35 @@ function App() {
         .catch((err) => {
           console.log(err)
       })
-  } 
+  }
 
   function handleCardDelete(props){
     api.deleteCard(props._id)
-      .then(setCards(cards.filter(newCards=> newCards._id !== props._id )))
-      .catch((err) => {
-        console.log(err)
-    })
+    .then(setCards(cards.filter(newCards=> newCards._id !== props._id )))
+    .then(()=> closeAllPopups())
+    .catch((err) => {console.log(err)})
   }
 
   function handleUpdateUser(data){
     api.setUserInfo(data)
     .then((data)=> {setCurrentUser(data)})
+    .then(()=> closeAllPopups())
     .catch((err)=>{console.log(err)})
-    closeAllPopups()
   }
 
   function handleUpdateAvatar(data){
     api.setUserAvatar(data)
-    .then((data)=> {setCurrentUser(data)})
-    .catch((err)=>{console.log(err)})
-    closeAllPopups()
+      .then((data)=> {setCurrentUser(data)})
+      .then(()=> closeAllPopups())
+      .catch((err)=>{console.log(err)})
   }
 
   function handleAddPlaceSubmit(data){
     api.setNewCard(data)
     .then((newCard)=> setCards([newCard, ...cards]))
+    .then(()=> closeAllPopups())
     .catch((err)=>{console.log(err)})
-    closeAllPopups()
+
   }
 
   function closeAllPopups(){
@@ -116,6 +122,7 @@ function App() {
     setIsEditAvatarPopupOpen(false)
     setIsImagePopupOpen(false)
     setIsDeletePopupOpen(false)
+    setSaveButton({add: 'Добавить', save: 'Сохранить', delete: 'Да'})
   }
 
   return (
@@ -139,18 +146,24 @@ function App() {
           isOpen={isEditProfilePopupOpen} 
           onClose={closeAllPopups} 
           onUpdateUser={handleUpdateUser}
+          saveButton = {saveButton}
+          saveButtonClick = {handleСhangeSaveButton}
         />
 
         <EditAvatarPopup 
           isOpen= {isEditAvatarPopupOpen}
           onClose = {closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
+          saveButton = {saveButton}
+          saveButtonClick = {handleСhangeSaveButton}
         />
 
         <AddPlacePopup 
           isOpen= {isAddPlacePopupOpen}
           onClose = {closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
+          saveButton = {saveButton}
+          saveButtonClick = {handleСhangeSaveButton}
         />
 
         <DeletePopup
@@ -158,6 +171,8 @@ function App() {
           isOpen={isDeletePopupOpen} 
           onClose={closeAllPopups} 
           onCardDelete={handleCardDelete}
+          saveButton = {saveButton}
+          saveButtonClick = {handleСhangeSaveButton}
         />
 
         <ImagePopup

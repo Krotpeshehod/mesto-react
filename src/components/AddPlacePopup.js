@@ -13,7 +13,7 @@ function AddPlacePopup (props){
       link: newLinkRef.current.value
     });
     evt.target.reset()
-  } 
+  }
 
   return(
     <PopupWithForm
@@ -23,6 +23,8 @@ function AddPlacePopup (props){
     isOpen={props.isOpen} 
     onClose={props.onClose}
     onSubmit={handleSubmit}
+    saveButton= {props.saveButton.add}
+    saveButtonClick = {props.saveButtonClick}
   >
     <input ref={newNameRef} className="popup__form-text popup__form-text_type_element-name" type="text" id="name-card" name="name"
       required placeholder="Название" minLength="2" maxLength="30" autoComplete="off" />
