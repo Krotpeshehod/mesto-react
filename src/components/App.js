@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 import {CurrentUserContext} from '../contexts/CurrentUserContext'
-import '../index.css';
-import '../utils/api';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
