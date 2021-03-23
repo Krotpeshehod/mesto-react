@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import {CurrentUserContext} from '../contexts/CurrentUserContext'
 import '../index.css';
 import '../utils/api';
-import loadingImage from '../image/gif/loading.gif'
-import errorImage from '../image/gif/error.gif'
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -13,6 +11,7 @@ import EditAvatarPopup from './EditAvatarPopup'
 import AddPlacePopup from './AddPlacePopup'
 import api from '../utils/api';
 import DeletePopup from './DeletePopup';
+import {saveButtonName, loadingInfo} from '../utils/utils'
 
 function App() {
   
@@ -21,14 +20,15 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false)
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false)
+
   const [selectedCard, setSelectedCard] = useState(false)
   const [currentUser, setCurrentUser] = useState('')
   const [cards, setCards] = useState([])
 
   const [loading, setLoading] = useState(true)
-  const [loadingData, setLoadingData] = useState({image:loadingImage})
+  const [loadingData, setLoadingData] = useState(loadingInfo.loading)
 
-  const [saveButton, setSaveButton] = useState({add: 'Добавить', save: 'Сохранить', delete: 'Да'})
+  const [saveButton, setSaveButton] = useState(saveButtonName.standart)
  
   useEffect(()=>{
     Promise.all([api.getUserData(), api.getAllCards()])
@@ -39,14 +39,22 @@ function App() {
       .then(()=> setLoading(false))
       .catch((err) => {
         console.log(err);
-        setTimeout(() => setLoadingData(
-          { image: errorImage,
-            width: '300px',
-            height: '300px',
-            name: `${err}. Что-то пошло не так и мы уже прикладываем подорожник. Приходите попозже 😭`
-          }
-        ), 10000)
+        setTimeout(() => setLoadingData(loadingInfo.error), 10000)
       })
+  }, [])
+
+  useEffect(() => {
+
+    const clickOverlay = (evt) =>{
+      if(evt.target.classList.contains('popup_visible')){
+        closeAllPopups()
+      }
+    }
+      window.addEventListener('click', clickOverlay);
+
+    return () => {
+      window.removeEventListener('click', clickOverlay);
+    };
   }, [])
 
 
@@ -73,47 +81,47 @@ function App() {
   }
 
   function handleСhangeSaveButton(){
-    setSaveButton({add: 'Сохранение...', save: 'Сохранение...', delete: 'Удаление...'})
+    setSaveButton(saveButtonName.afterClick)
   }
 
   function handleCardLike(props){
     const isLiked = props.likes.some(item => item._id === currentUser._id)
-    api.changeLikeCardStatus(props._id, !isLiked)
-        .then((newCard) => {
-          setCards((state) => state.map((c) => c._id === props._id ? newCard : c));
-        })
-        .catch((err) => {
-          console.log(err)
-      })
+    api
+      .changeLikeCardStatus(props._id, !isLiked)
+      .then((newCard) => {setCards((state) => state.map((c) => c._id === props._id ? newCard : c))})
+      .catch((err) => {console.log(err)})
   }
 
   function handleCardDelete(props){
-    api.deleteCard(props._id)
-    .then(setCards(cards.filter(newCards=> newCards._id !== props._id )))
-    .then(()=> closeAllPopups())
-    .catch((err) => {console.log(err)})
+    api
+      .deleteCard(props._id)
+      .then(setCards(cards.filter(newCards=> newCards._id !== props._id )))
+      .then(()=> closeAllPopups())
+      .catch((err) => {console.log(err)})
   }
 
   function handleUpdateUser(data){
-    api.setUserInfo(data)
-    .then((data)=> {setCurrentUser(data)})
-    .then(()=> closeAllPopups())
-    .catch((err)=>{console.log(err)})
+    api
+      .setUserInfo(data)
+      .then((data)=> {setCurrentUser(data)})
+      .then(()=> closeAllPopups())
+      .catch((err)=>{console.log(err)})
   }
 
   function handleUpdateAvatar(data){
-    api.setUserAvatar(data)
+    api
+      .setUserAvatar(data)
       .then((data)=> {setCurrentUser(data)})
       .then(()=> closeAllPopups())
       .catch((err)=>{console.log(err)})
   }
 
   function handleAddPlaceSubmit(data){
-    api.setNewCard(data)
-    .then((newCard)=> setCards([newCard, ...cards]))
-    .then(()=> closeAllPopups())
-    .catch((err)=>{console.log(err)})
-
+    api
+      .setNewCard(data)
+      .then((newCard)=> setCards([newCard, ...cards]))
+      .then(()=> closeAllPopups())
+      .catch((err)=>{console.log(err)})
   }
 
   function closeAllPopups(){
@@ -122,7 +130,7 @@ function App() {
     setIsEditAvatarPopupOpen(false)
     setIsImagePopupOpen(false)
     setIsDeletePopupOpen(false)
-    setSaveButton({add: 'Добавить', save: 'Сохранить', delete: 'Да'})
+    setSaveButton(saveButtonName.standart)
   }
 
   return (
@@ -134,9 +142,9 @@ function App() {
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onCardClick={handleCardClick}
-          cards={cards}
           onCardLike={handleCardLike}
           onCardDeletePopup={handleDeleteCardClick}
+          cards={cards}
           isLoading={loading}
           loadingData={loadingData}
         />
@@ -146,33 +154,33 @@ function App() {
           isOpen={isEditProfilePopupOpen} 
           onClose={closeAllPopups} 
           onUpdateUser={handleUpdateUser}
-          saveButton = {saveButton}
           saveButtonClick = {handleСhangeSaveButton}
+          saveButton = {saveButton}
         />
 
         <EditAvatarPopup 
           isOpen= {isEditAvatarPopupOpen}
           onClose = {closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
-          saveButton = {saveButton}
           saveButtonClick = {handleСhangeSaveButton}
+          saveButton = {saveButton}
         />
 
         <AddPlacePopup 
           isOpen= {isAddPlacePopupOpen}
           onClose = {closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
-          saveButton = {saveButton}
           saveButtonClick = {handleСhangeSaveButton}
+          saveButton = {saveButton}
         />
 
         <DeletePopup
           card = {selectedCard}
-          isOpen={isDeletePopupOpen} 
+          isOpen={isDeletePopupOpen}
           onClose={closeAllPopups} 
           onCardDelete={handleCardDelete}
-          saveButton = {saveButton}
           saveButtonClick = {handleСhangeSaveButton}
+          saveButton = {saveButton}
         />
 
         <ImagePopup

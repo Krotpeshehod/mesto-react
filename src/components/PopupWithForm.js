@@ -1,6 +1,6 @@
 function PopupWithForm(props){
 
- return(
+  return(
     <section className={`popup popup_place_${props.name} ${props.isOpen? 'popup_visible' : 'popup'}`}>
       <div className={`popup__window popup__window_place_${props.name}`}>
         <button className="link-opacity popup__close-button" type="button"
