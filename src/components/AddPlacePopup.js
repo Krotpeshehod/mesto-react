@@ -22,7 +22,8 @@ function AddPlacePopup (props){
     isOpen={props.isOpen} 
     onClose={props.onClose}
     onSubmit={handleSubmit}
-    saveButton= {props.saveButton.add}
+    saveButton= {props.saveButton.addImage}
+    saveButtonInvalid = {props.saveButton.invalid}
     saveButtonClick = {props.saveButtonClick}
   >
     <input ref={newNameRef} className="popup__form-text popup__form-text_type_element-name" type="text" id="name-card" name="name"

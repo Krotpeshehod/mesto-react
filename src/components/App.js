@@ -13,6 +13,7 @@ import api from '../utils/api';
 import DeletePopup from './DeletePopup';
 import {saveButtonName, loadingInfo} from '../utils/utils'
 
+
 function App() {
   
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
@@ -44,19 +45,25 @@ function App() {
   }, [])
 
   useEffect(() => {
-
     const clickOverlay = (evt) =>{
-      if(evt.target.classList.contains('popup_visible')){
+      if (evt.target.classList.contains('popup_visible')){
         closeAllPopups()
       }
     }
+    const clickEscape = (evt) =>{
+      if(evt.key === 'Escape'){
+        closeAllPopups()
+      }
+    }
+    if((isEditProfilePopupOpen|| isEditAvatarPopupOpen || isAddPlacePopupOpen || isImagePopupOpen || isDeletePopupOpen) === true){
       window.addEventListener('click', clickOverlay);
-
+      window.addEventListener('keyup', clickEscape);
+    }
     return () => {
       window.removeEventListener('click', clickOverlay);
-    };
-  }, [])
-
+      window.removeEventListener('keyup', clickEscape);
+    }
+  }, [isEditProfilePopupOpen, isEditAvatarPopupOpen, isAddPlacePopupOpen, isImagePopupOpen, isDeletePopupOpen])
 
   function handleEditProfileClick(){
     setIsEditProfilePopupOpen(true)
@@ -95,7 +102,7 @@ function App() {
   function handleCardDelete(props){
     api
       .deleteCard(props._id)
-      .then(setCards(cards.filter(newCards=> newCards._id !== props._id )))
+      .then(()=> setCards(cards.filter(newCards=> newCards._id !== props._id )))
       .then(()=> closeAllPopups())
       .catch((err) => {console.log(err)})
   }
@@ -103,9 +110,13 @@ function App() {
   function handleUpdateUser(data){
     api
       .setUserInfo(data)
-      .then((data)=> {setCurrentUser(data)})
+      .then((data)=> setCurrentUser(data))
       .then(()=> closeAllPopups())
-      .catch((err)=>{console.log(err)})
+      .catch((err)=>{
+        console.log(err) 
+        setSaveButton(saveButtonName.error)
+        setTimeout(() => setSaveButton(saveButtonName.standart), 3000)
+      })
   }
 
   function handleUpdateAvatar(data){
@@ -113,7 +124,11 @@ function App() {
       .setUserAvatar(data)
       .then((data)=> {setCurrentUser(data)})
       .then(()=> closeAllPopups())
-      .catch((err)=>{console.log(err)})
+      .catch((err)=>{
+        console.log(err)
+        setSaveButton(saveButtonName.error)
+        setTimeout(() => setSaveButton(saveButtonName.standart), 3000)
+      })
   }
 
   function handleAddPlaceSubmit(data){
@@ -121,7 +136,11 @@ function App() {
       .setNewCard(data)
       .then((newCard)=> setCards([newCard, ...cards]))
       .then(()=> closeAllPopups())
-      .catch((err)=>{console.log(err)})
+      .catch((err)=>{
+        console.log(err)
+        setSaveButton(saveButtonName.error)
+        setTimeout(() => setSaveButton(saveButtonName.standart), 3000)
+      })
   }
 
   function closeAllPopups(){

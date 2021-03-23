@@ -6,9 +6,9 @@ function PopupWithForm(props){
         <button className="link-opacity popup__close-button" type="button"
           aria-label="закрыть" onClick={props.onClose}/>
         <h2 className="popup__title">{props.title}</h2>
-        <form className={`popup__form popup__form_place_${props.name}`} name={props.name} noValidate onSubmit={props.onSubmit} >
+        <form className={`popup__form popup__form_place_${props.name}`} name={props.name} noValidate onSubmit={props.onSubmit}>
           {props.children}
-          <button className="popup__save-button" type="submit" onClick={props.saveButtonClick}>{props.saveButton}</button>
+          <button className={`popup__save-button ${props.saveButtonInvalid}`} type="submit" onClick={props.saveButtonClick}>{props.saveButton}</button>
         </form>
       </div>
     </section>

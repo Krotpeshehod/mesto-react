@@ -15,6 +15,7 @@ function DeletePopup(props){
       onClose = {props.onClose}
       onSubmit= {handleDeleteClick}
       saveButton= {props.saveButton.delete}
+      saveButtonInvalid = {props.saveButton.invalid}
       saveButtonClick = {props.saveButtonClick}
     />
   )

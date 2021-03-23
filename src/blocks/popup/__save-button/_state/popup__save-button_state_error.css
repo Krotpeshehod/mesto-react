@@ -1,0 +1,4 @@
+.popup__save-button_state_error {
+  background-color: red;
+  cursor: default;
+}

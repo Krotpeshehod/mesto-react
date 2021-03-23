@@ -10,15 +10,25 @@ export const onError = (res)=>{
 
 export const saveButtonName = {
   standart:{
-    add: 'Добавить', 
-    save: 'Сохранить', 
+    saveProfile: 'Сохранить', 
+    saveAvatar: 'Сохранить',
+    addImage: 'Добавить',
     delete: 'Да',
+    invalid: '',
   },
   afterClick:{
-    add: 'Сохранение...', 
-    save: 'Сохранение...', 
+    saveProfile: 'Сохранение...', 
+    saveAvatar: 'Сохранение...', 
+    addImage: 'Сохранение...',
     delete: 'Удаление...',
-  }
+    invalid: 'popup__save-button_state_invalid',
+  },
+  error:{ 
+    saveProfile: 'Введите имя и описание', 
+    saveAvatar: 'Введите url картинки',
+    addImage: 'Введите название и url картинки',
+    invalid: 'popup__save-button_state_error',
+  },
 }
 
 export const loadingInfo = {

@@ -19,7 +19,8 @@ function EditAvatarPopup(props){
       isOpen= {props.isOpen}
       onClose = {props.onClose}
       onSubmit= {handleSubmit}
-      saveButton= {props.saveButton.save}
+      saveButton= {props.saveButton.saveAvatar}
+      saveButtonInvalid = {props.saveButton.invalid}
       saveButtonClick = {props.saveButtonClick}
   >
     <input className="popup__form-text popup__form-text_type_avatar" type="url" id="avatar" name="avatar" required
