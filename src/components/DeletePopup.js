@@ -9,14 +9,14 @@ function DeletePopup(props){
 
   return(
     <PopupWithForm
-      name= 'delete-card'
-      title= 'Вы уверены?'
-      isOpen= {props.isOpen}
-      onClose = {props.onClose}
-      onSubmit= {handleDeleteClick}
-      saveButton= {props.saveButton.delete}
-      saveButtonInvalid = {props.saveButton.invalid}
-      saveButtonClick = {props.saveButtonClick}
+      name='delete-card'
+      title='Вы уверены?'
+      isOpen={props.isOpen}
+      onClose={props.onClose}
+      onSubmit={handleDeleteClick}
+      saveButton={props.saveButton.delete}
+      saveButtonInvalid={props.saveButton.invalid}
+      saveButtonClick={props.saveButtonClick}
     />
   )
 }

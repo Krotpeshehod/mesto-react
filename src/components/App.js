@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import {CurrentUserContext} from '../contexts/CurrentUserContext'
+
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -7,9 +8,9 @@ import ImagePopup from './ImagePopup'
 import EditProfilePopup from './EditProfilePopup'
 import EditAvatarPopup from './EditAvatarPopup'
 import AddPlacePopup from './AddPlacePopup'
-import api from '../utils/api';
 import DeletePopup from './DeletePopup';
 import {saveButtonName, loadingInfo} from '../utils/utils'
+import api from '../utils/api';
 
 
 function App() {
@@ -19,14 +20,11 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false)
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false)
-
   const [selectedCard, setSelectedCard] = useState(false)
   const [currentUser, setCurrentUser] = useState('')
   const [cards, setCards] = useState([])
-
   const [loading, setLoading] = useState(true)
   const [loadingData, setLoadingData] = useState(loadingInfo.loading)
-
   const [saveButton, setSaveButton] = useState(saveButtonName.standart)
  
   useEffect(()=>{
@@ -85,8 +83,17 @@ function App() {
     setIsDeletePopupOpen(true)
   }
 
-  function handleСhangeSaveButton(){
+  function handleChangeSaveButton(){
     setSaveButton(saveButtonName.afterClick)
+  }
+
+  function closeAllPopups(){
+    setIsEditProfilePopupOpen(false)
+    setIsAddPlacePopupOpen (false)
+    setIsEditAvatarPopupOpen(false)
+    setIsImagePopupOpen(false)
+    setIsDeletePopupOpen(false)
+    setSaveButton(saveButtonName.standart)
   }
 
   function handleCardLike(props){
@@ -141,15 +148,6 @@ function App() {
       })
   }
 
-  function closeAllPopups(){
-    setIsEditProfilePopupOpen(false)
-    setIsAddPlacePopupOpen (false)
-    setIsEditAvatarPopupOpen(false)
-    setIsImagePopupOpen(false)
-    setIsDeletePopupOpen(false)
-    setSaveButton(saveButtonName.standart)
-  }
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
@@ -166,49 +164,43 @@ function App() {
           loadingData={loadingData}
         />
         <Footer/>
-
         <EditProfilePopup 
           isOpen={isEditProfilePopupOpen} 
           onClose={closeAllPopups} 
           onUpdateUser={handleUpdateUser}
-          saveButtonClick = {handleСhangeSaveButton}
-          saveButton = {saveButton}
+          saveButtonClick ={handleChangeSaveButton}
+          saveButton={saveButton}
         />
-
         <EditAvatarPopup 
-          isOpen= {isEditAvatarPopupOpen}
-          onClose = {closeAllPopups}
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
-          saveButtonClick = {handleСhangeSaveButton}
-          saveButton = {saveButton}
+          saveButtonClick={handleChangeSaveButton}
+          saveButton={saveButton}
         />
-
         <AddPlacePopup 
-          isOpen= {isAddPlacePopupOpen}
-          onClose = {closeAllPopups}
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
-          saveButtonClick = {handleСhangeSaveButton}
-          saveButton = {saveButton}
+          saveButtonClick={handleChangeSaveButton}
+          saveButton={saveButton}
         />
-
         <DeletePopup
-          card = {selectedCard}
+          card={selectedCard}
           isOpen={isDeletePopupOpen}
           onClose={closeAllPopups} 
           onCardDelete={handleCardDelete}
-          saveButtonClick = {handleСhangeSaveButton}
-          saveButton = {saveButton}
+          saveButtonClick={handleChangeSaveButton}
+          saveButton={saveButton}
         />
-
         <ImagePopup
-          card = {selectedCard}
-          isOpen = {isImagePopupOpen}
-          onClose = {closeAllPopups}
+          card={selectedCard}
+          isOpen={isImagePopupOpen}
+          onClose={closeAllPopups}
         />
-
       </div>
     </CurrentUserContext.Provider>
-  );
+  )
 }
 
 export default App;

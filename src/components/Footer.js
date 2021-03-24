@@ -2,7 +2,7 @@ function Footer(){
   
   return(
     <footer className="footer">
-      <p className="footer__title">&copy; 2020. Борисенко Валерий</p>
+      <p className="footer__title">&copy; 2021. Borisenko Valerii</p>
     </footer>
   )
 }

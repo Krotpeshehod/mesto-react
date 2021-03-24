@@ -1,6 +1,8 @@
 {
   "name": "mesto-react",
   "version": "0.1.0",
+  "description": "Данный [проект](https://krotpeshehod.github.io/mesto-react/index.html \"Mesto\") похож на страницу в инстаграмме, где мы можем редактировать имя нашего героя и информацию о нем, добавлять карточки, оценивать фотогаллерею и удалять не понравившиеся.",
+  "author": "Valeriy Borisenko",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
@@ -19,6 +21,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
+  
   "eslintConfig": {
     "extends": [
       "react-app",

@@ -1,8 +1,8 @@
 import { useContext } from "react"
+import {CurrentUserContext} from '../contexts/CurrentUserContext'
+
 import Card from './Card'
 import Loading from './Loading';
-
-import {CurrentUserContext} from '../contexts/CurrentUserContext'
 
 function Main (props){
 
@@ -11,13 +11,13 @@ function Main (props){
   return(
     <main className="content">
       <Loading
-        isLoading= {props.isLoading}
+        isLoading={props.isLoading}
         loadingData={props.loadingData}
       />
       <section className="profile">
         <div className="profile__content">
           <div className="profile__avatar-container">
-            <div className="profile__avatar" style={{ backgroundImage: `url(${currentUser.avatar})`}}  aria-label="аватарка пользователя" />
+            <div className="profile__avatar" style={{ backgroundImage: `url(${currentUser.avatar})`}}  aria-label="аватарка пользователя"/>
             <button className="profile__edit-button profile__edit-button_place_avatar" aria-label="редактировать аватар"
               type="button" onClick={props.onEditAvatar}/>
           </div>
@@ -31,20 +31,19 @@ function Main (props){
         </div>
         <button className="link-opacity profile__add-button" aria-label="добавить" type="button" onClick={props.onAddPlace}/>
       </section>
-
       <section className="elements">
         <ul className="elements__container">
           {props.cards.map(item=>
-          <Card 
-          key={item._id} 
-          {...item} 
-          onCardClick={props.onCardClick} 
-          onCardLike={props.onCardLike} 
-          onCardDeletePopup={props.onCardDeletePopup}
-          />)}
+            <Card 
+              key={item._id} 
+              {...item} 
+              onCardClick={props.onCardClick} 
+              onCardLike={props.onCardLike} 
+              onCardDeletePopup={props.onCardDeletePopup}
+            />
+          )}
         </ul>
       </section>
-        
     </main>
   )
 }
