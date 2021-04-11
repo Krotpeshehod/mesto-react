@@ -1,8 +1,8 @@
 {
   "name": "mesto-react",
   "version": "0.1.0",
-  "description": "Данный [проект](https://krotpeshehod.github.io/mesto-react/index.html \"Mesto\") похож на страницу в инстаграмме, где мы можем редактировать имя нашего героя и информацию о нем, добавлять карточки, оценивать фотогаллерею и удалять не понравившиеся.",
-  "author": "Valeriy Borisenko",
+  "description": "Данный проект похож на страницу в соц.сети. Мы можем редактировать информацию о пользователе, обновлять аватар, добавлять новые фотографии с описанием к ним, оценивать фотогалерею и удалять свои посты",
+  "author": "Valerii Borisenko",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
@@ -40,7 +40,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://krotpeshehod.github.io/mesto-react/",
+  "homepage": "https://valeriiBorisenko.github.io/mesto-react/",
   "devDependencies": {
     "gh-pages": "^3.1.0"
   }
