@@ -1,18 +1,17 @@
-# Проект: Место на React
+# Project: Mesto
 
-### О чем проект
+### About project
 
-Данный [проект](https://valeriiBorisenko.github.io/mesto-react/index.html "Mesto-react") похож на страницу в соц.сети. Мы можем редактировать информацию о пользователе, обновлять аватар, добавлять новые фотографии с описанием к ним, оценивать фотогалерею и удалять свои посты.
+The project is similar to a page on a social network where users share photos and rate others. Made with React
 
-### Какие я использовал технологии:
+### Technologies:
 
 - React
 - Hooks (state, effect, ref, context)
 - WebPack
 - REST API
-- Адаптивная и отзывчивая верстка
 - Flеx
 - Grid Layout
 - Nested BEM
 
-#### Приятного просмотра!
+#### Enjoy!
